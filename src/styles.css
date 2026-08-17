@@ -1,0 +1,274 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * KREADS design system — « Le Studio de Vente »
+ * 80% neutres teintés violet, 15% violet KREADS, 5% turquoise.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-scene: var(--scene);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-light: var(--primary-light);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-violet: var(--violet);
+  --color-violet-glow: var(--violet-glow);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.1186 0.0261 294.01);
+  --foreground: oklch(0.9643 0.007 88.64);
+  --scene: oklch(0.1545 0.0295 285.65);
+  --card: oklch(0.1837 0.0303 289.16);
+  --card-foreground: oklch(0.9643 0.007 88.64);
+  --popover: oklch(0.1545 0.0295 285.65);
+  --popover-foreground: oklch(0.9643 0.007 88.64);
+  --primary: oklch(0.7725 0.1428 177.43);
+  --primary-foreground: oklch(0.1186 0.0261 294.01);
+  --primary-light: oklch(0.817 0.139 179.71);
+  --primary-deep: oklch(0.6254 0.1156 177.46);
+  --violet: oklch(0.3077 0.1223 293.38);
+  --violet-glow: oklch(0.5489 0.2341 285.4);
+  --secondary: oklch(0.3077 0.1223 293.38);
+  --secondary-foreground: oklch(0.9643 0.007 88.64);
+  --muted: oklch(0.1837 0.0303 289.16);
+  --muted-foreground: oklch(0.6443 0.0328 293.8);
+  --accent: oklch(0.7725 0.1428 177.43);
+  --accent-foreground: oklch(0.1186 0.0261 294.01);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.9643 0.007 88.64);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7725 0.1428 177.43);
+
+  --gradient-brand: linear-gradient(100deg, var(--primary), var(--violet-glow));
+  --gradient-line: linear-gradient(180deg, var(--primary), var(--violet-glow));
+  --shadow-glow: 0 0 40px -8px oklch(0.7725 0.1428 177.43 / 0.55);
+  --shadow-scene: 0 40px 120px -40px oklch(0.3077 0.1223 293.38 / 0.9);
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+}
+
+@utility text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass-card {
+  background: color-mix(in oklab, var(--violet) 28%, transparent);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+}
+
+@utility scene {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* Film grain overlay */
+@utility grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility halo {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@utility marquee-track {
+  animation: kreads-marquee 26s linear infinite;
+}
+
+@keyframes kreads-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes kreads-spin-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kreads-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes kreads-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@utility text-sheen {
+  background: linear-gradient(
+    100deg,
+    var(--primary),
+    var(--violet-glow),
+    var(--primary)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: kreads-sheen 5s linear infinite;
+}
+
+@utility pulse-cta {
+  animation: kreads-pulse 2s ease-in-out infinite;
+}
+
+/* ── WhatsApp floating action button ── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: white;
+  box-shadow:
+    0 4px 14px rgba(37, 211, 102, 0.4),
+    0 0 0 0 rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s var(--ease-signature), box-shadow 0.3s ease;
+  animation: whatsapp-pulse 2s ease-in-out infinite;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 6px 20px rgba(37, 211, 102, 0.5),
+    0 0 0 0 rgba(37, 211, 102, 0);
+}
+
+.whatsapp-fab:active {
+  transform: scale(0.95);
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow:
+      0 4px 14px rgba(37, 211, 102, 0.4),
+      0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  70% {
+    box-shadow:
+      0 4px 14px rgba(37, 211, 102, 0.4),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow:
+      0 4px 14px rgba(37, 211, 102, 0.4),
+      0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
