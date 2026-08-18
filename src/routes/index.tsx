@@ -15,7 +15,7 @@ import { FinalCta } from "@/components/kreads/FinalCta";
 import { Footer } from "@/components/kreads/Footer";
 import { Trust } from "@/components/kreads/Trust";
 import { Realisations } from "@/components/kreads/Realisations";
-import { WhatsAppButton } from "@/components/kreads/WhatsAppButton";
+
 import homeLogo from "@/assets/kreads-home-logo.png";
 
 const TITLE = "KREADS — Studio de créatives publicitaires qui vendent";
@@ -233,7 +233,6 @@ const [active, setActive] = useState("hero");
         <FinalCta />
       </main>
       <Footer />
-      <WhatsAppButton />
     </>
   );
 }
