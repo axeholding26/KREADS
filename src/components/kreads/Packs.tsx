@@ -174,6 +174,15 @@ className="text-center text-[clamp(1.6rem,4.2vw,3.6rem)] font-bold"
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="w-full"
+                      onClick={() => {
+                        if (typeof window !== "undefined" && (window as any).fbq) {
+                          (window as any).fbq("track", "Lead", {
+                            content_name: pack.name,
+                            value: pack.price,
+                            currency: "XAF",
+                          });
+                        }
+                      }}
                     >
                       Je lance mon projet
                     </MagneticButton>

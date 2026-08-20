@@ -11,6 +11,7 @@ export function MagneticButton({
   pulse = false,
   target,
   rel,
+  onClick,
 }: {
   children: ReactNode;
   variant?: "solid" | "outline";
@@ -20,6 +21,7 @@ export function MagneticButton({
   pulse?: boolean;
   target?: string;
   rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -30,6 +32,7 @@ export function MagneticButton({
       href={href}
       target={target}
       rel={rel}
+      onClick={onClick}
       className={cn(
         "group relative inline-flex items-center justify-center overflow-hidden rounded-full font-medium transition-[box-shadow,color] duration-500",
         size === "lg" ? "px-10 py-5 text-lg" : "px-7 py-3.5 text-base",
